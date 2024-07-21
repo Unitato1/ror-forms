@@ -1,1 +1,34 @@
 <h1>Hello World!</h1>
+<form accept-charset="UTF-8" action="/users" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label for="username">Username:</label>
+  <input type="text" name="user[username]" id="username"><br>
+  <label for="password">Password:</label>
+  <input type="password" name="user[password]" id="password"><br>
+  <label for="email">Email:</label>
+  <input type="email" name="user[email]" id="email"><br>
+  <input type="submit" value="Submit This Form" >
+</form>
+<br>
+<%= form_tag "/users" do %>
+  <%= label_tag(:user_username, "Username:") %>
+  <%= text_field(:user, :username) %><br>
+  <%= label_tag(:user_email, "Email:") %>
+  <%= email_field(:user, :email) %><br>
+  <%= label_tag(:user_password, "Password:") %>
+  <%= password_field(:user, :password) %><br>
+  <%= submit_tag("Submit This Form") %>
+<% end %>
+<br>
+<%= form_with model: @user do |form| %>
+  <%= form.label :username, "Username: "%>
+  <%= form.text_field :username, value: "Bob" %>
+  <br>
+  <%= form.label :password, "Password: "%>
+  <%= form.password_field :password, value: ""%>
+  <br>
+  <%= form.label :email, "Email: "%>
+  <%= form.email_field :email, value: "example@email.com"%>
+  <br>
+  <%= form.submit "Submit This Form!"%>
+<% end %>
